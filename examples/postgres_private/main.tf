@@ -33,7 +33,7 @@ module "db" {
   project_id = var.project
   name       = "db-${random_id.suffix.hex}"
 
-  database_version = "POSTGRES_12"
+  database_version = "POSTGRES_14"
   region           = local.region
   zone             = split("-", var.zone)[2]
   tier             = "db-f1-micro"
