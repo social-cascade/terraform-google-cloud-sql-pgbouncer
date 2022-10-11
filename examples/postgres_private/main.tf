@@ -31,7 +31,7 @@ module "db" {
 
   database_version = "POSTGRES_14"
   region           = local.region
-  zone             = split("-", var.zone)[2]
+  zone             = var.zone
   tier             = "db-f1-micro"
 
   db_name       = var.db_name
