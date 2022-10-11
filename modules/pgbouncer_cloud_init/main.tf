@@ -20,22 +20,17 @@ locals {
   )
 }
 
-data "template_file" "cloud_config" {
-  template = file("${path.module}/templates/cloud-init.yaml.tmpl")
-  vars = {
-    image       = "edoburu/pgbouncer:${var.pgbouncer_image_tag}"
-    listen_port = var.listen_port
-    config      = base64encode(local.cloud_config)
-    userlist    = base64encode(local.userlist)
-  }
-}
-
 data "cloudinit_config" "cloud_config" {
   gzip          = false
   base64_encode = false
   part {
     filename     = "cloud-init.yaml"
     content_type = "text/cloud-config"
-    content      = data.template_file.cloud_config.rendered
+    content      = templatefile("${path.module}/templates/cloud-init.yaml.tmpl", {
+      image       = "edoburu/pgbouncer:${var.pgbouncer_image_tag}"
+      listen_port = var.listen_port
+      config      = base64encode(local.cloud_config)
+      userlist    = base64encode(local.userlist)
+    })
   }
 }
