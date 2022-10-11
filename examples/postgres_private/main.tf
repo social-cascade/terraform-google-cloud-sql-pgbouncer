@@ -16,7 +16,7 @@ data "google_compute_subnetwork" "subnet" {
 
 module "private_service_access" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/private_service_access"
-  version = "~>5.0.0"
+  version = "~>12.1.0"
 
   project_id  = var.project
   vpc_network = var.network_name
@@ -24,7 +24,7 @@ module "private_service_access" {
 
 module "db" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
-  version = "~>5.0.0"
+  version = "~>12.1.0"
 
   project_id = var.project
   name       = "db-${random_id.suffix.hex}"
