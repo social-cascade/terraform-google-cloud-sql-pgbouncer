@@ -43,6 +43,7 @@ module "db" {
     private_network     = data.google_compute_subnetwork.subnet.network
     require_ssl         = false
     authorized_networks = []
+    allocated_ip_range  = null
   }
 
   module_depends_on = [module.private_service_access.peering_completed]
