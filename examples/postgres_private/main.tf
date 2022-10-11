@@ -33,6 +33,7 @@ module "db" {
   region           = local.region
   zone             = var.zone
   tier             = "db-f1-micro"
+  create_timeout   = "30m"
 
   db_name       = var.db_name
   user_name     = var.db_user
